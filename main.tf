@@ -34,7 +34,7 @@ data "external" "key_check" {
 
 locals {
   raw_key_name    = data.external.key_check.result.final_key_name
-  final_key_name  = regexreplace(local.raw_key_name, "[[:space:]]+", "-")
+  final_key_name  = replace(local.raw_key_name, " ", "-")
 }
 
 # Generate PEM key
