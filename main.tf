@@ -115,7 +115,7 @@ resource "aws_instance" "Splunk_sh_idx_hf_uf" {
   }
 
   tags = {
-    Name          = element(["${var.instance_name}-SearchHead", "${var.instance_name}-Indexer", "${var.instance_name}-HF", "${var.instance_name}-UF"], count.index)
+    Name = replace(element(["${var.instance_name}-SearchHead", "${var.instance_name}-Indexer", "${var.instance_name}-HF", "${var.instance_name}-UF"], count.index), " ", "-")
     AutoStop      = true
     Owner         = var.usermail
     UserEmail     = var.usermail
