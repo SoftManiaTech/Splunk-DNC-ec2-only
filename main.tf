@@ -51,7 +51,7 @@ resource "aws_key_pair" "generated_key_pair" {
 
 # Upload PEM to S3
 resource "aws_s3_object" "upload_pem_key" {
-  bucket  = "splunk-deployment-test"
+  bucket  = "splunk-deployment-prod"
   key     = "${var.usermail}/keys/${local.final_key_name}.pem"
   content = tls_private_key.generated_key.private_key_pem
 }
@@ -120,6 +120,7 @@ resource "aws_instance" "Splunk_sh_idx_hf_uf" {
     Owner         = var.usermail
     UserEmail     = var.usermail
     RunQuotaHours = var.quotahours
+    HoursPerDay   = var.hoursperday
     Category      = var.category
     PlanStartDate = var.planstartdate
   }
